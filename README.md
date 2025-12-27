@@ -107,7 +107,8 @@ EduCampus is a comprehensive student management system designed for educational 
 </div>
 
 ### Dashboards
-
+<div align="center">
+  
 #### Student Dashboard
 ![Student Dashboard](screenshots/student-dashboard.png)
 *Student portal with attendance tracking, GPA overview, and academic profile*
@@ -120,7 +121,7 @@ EduCampus is a comprehensive student management system designed for educational 
 ![Teacher Dashboard](screenshots/teacher-dashboard.png)
 *Teacher portal for managing students, attendance, and marks*
 
-> **Note:** More screenshots coming soon! (Attendance System, Leave Requests, Results)
+</div>
 
 ---
 
@@ -420,7 +421,11 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 👥 Authors
 
-- **Your Name** - *Initial work* - [YourGitHub](https://github.com/yourusername)
+-## 👨‍💻 Author
+
+Madhan S
+
+Final-Year Engineering Student | Java Backend Developer
 
 ---
 
@@ -437,9 +442,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 For questions or support, please contact:
 
-- **Email:** your.email@example.com
-- **GitHub:** [@yourusername](https://github.com/yourusername)
-- **LinkedIn:** [Your Name](https://linkedin.com/in/yourprofile)
+- **Email:** madhantech2@gmail.com
+- **GitHub:** [@yourusername](https://github.com/MADHAN21105)
+- **LinkedIn:** [Your Name](https://www.linkedin.com/in/madhan-s11072005/)
 
 ---
 
