@@ -3,10 +3,11 @@
 <div align="center">
 
 ![EduCampus Logo](https://img.shields.io/badge/EduCampus-Student%20Management-2563eb?style=for-the-badge&logo=graduation-cap)
+
 [![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.5.9-brightgreen?style=flat-square&logo=spring)](https://spring.io/projects/spring-boot)
 [![Java](https://img.shields.io/badge/Java-17-orange?style=flat-square&logo=java)](https://www.oracle.com/java/)
 [![MySQL](https://img.shields.io/badge/MySQL-Database-blue?style=flat-square&logo=mysql)](https://www.mysql.com/)
-[![License](https://img.shields.io/badge/License-MIT-yellow?style=flat-square)](LICENSE)
+
 
 **A modern, full-featured student management system with role-based dashboards, attendance tracking, and comprehensive analytics.**
 
@@ -413,11 +414,7 @@ Contributions are welcome! Please follow these steps:
 
 ---
 
-## 📝 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
----
 
 ## 👥 Authors
 
@@ -426,15 +423,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 Madhan S
 
 Final-Year Engineering Student | Java Backend Developer
-
----
-
-## 🙏 Acknowledgments
-
-- Spring Boot team for the excellent framework
-- Font Awesome for the icons
-- Google Fonts for the Inter font family
-- All contributors who helped improve this project
+ All contributors who helped improve this project
 
 ---
 
