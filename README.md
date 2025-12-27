@@ -30,7 +30,6 @@
 - [Testing](#-testing)
 - [API Documentation](#-api-documentation)
 - [Contributing](#-contributing)
-- [License](#-license)
 
 ---
 
