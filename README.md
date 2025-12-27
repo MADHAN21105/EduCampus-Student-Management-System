@@ -417,9 +417,7 @@ Contributions are welcome! Please follow these steps:
 
 ## 👥 Authors
 
-Madhan S
-
-Final-Year Engineering Student | Java Backend Developer
+Madhan S [Java Developer]
 ---
 
 ## 📞 Contact
