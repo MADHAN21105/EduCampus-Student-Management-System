@@ -108,6 +108,10 @@ EduCampus is a comprehensive student management system designed for educational 
 
 ### Dashboards
 
+#### Student Dashboard
+![Student Dashboard](screenshots/student-dashboard.png)
+*Student portal with attendance tracking, GPA overview, and academic profile*
+
 #### Admin Dashboard
 ![Admin Dashboard](screenshots/admin-dashboard.png)
 *Comprehensive admin dashboard with system overview and analytics*
@@ -116,7 +120,7 @@ EduCampus is a comprehensive student management system designed for educational 
 ![Teacher Dashboard](screenshots/teacher-dashboard.png)
 *Teacher portal for managing students, attendance, and marks*
 
-> **Note:** More screenshots coming soon! (Student Dashboard, Attendance System, Leave Requests, Results)
+> **Note:** More screenshots coming soon! (Attendance System, Leave Requests, Results)
 
 ---
 
