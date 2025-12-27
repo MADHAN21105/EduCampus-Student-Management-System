@@ -431,14 +431,14 @@ Final-Year Engineering Student | Java Backend Developer
 For questions or support, please contact:
 
 - **Email:** madhantech2@gmail.com
-- **GitHub:** [@yourusername](https://github.com/MADHAN21105)
-- **LinkedIn:** [Your Name](https://www.linkedin.com/in/madhan-s11072005/)
+- **GitHub:** [LINK](https://github.com/MADHAN21105)
+- **LinkedIn:** [LINK](https://www.linkedin.com/in/madhan-s11072005/)
 
 ---
 
 <div align="center">
 
-**Made with ❤️ for Education**
+**Made BY MADHAN.S for Education**
 
 ⭐ Star this repo if you find it helpful!
 
