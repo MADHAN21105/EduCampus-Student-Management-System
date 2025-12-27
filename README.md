@@ -417,13 +417,9 @@ Contributions are welcome! Please follow these steps:
 
 ## 👥 Authors
 
--## 👨‍💻 Author
-
 Madhan S
 
 Final-Year Engineering Student | Java Backend Developer
- All contributors who helped improve this project
-
 ---
 
 ## 📞 Contact
