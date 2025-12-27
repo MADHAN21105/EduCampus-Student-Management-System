@@ -89,47 +89,34 @@ EduCampus is a comprehensive student management system designed for educational 
 
 ## 📸 Screenshots
 
-### Login Page
-<!-- Add screenshot: screenshots/login.png -->
-![Login Page](screenshots/login.png)
-*Modern login interface with role selection (Student/Teacher/Admin)*
+### Login Pages
+<div align="center">
 
-### Student Dashboard
-<!-- Add screenshot: screenshots/student-dashboard.png -->
-![Student Dashboard](screenshots/student-dashboard.png)
-*Clean, intuitive student dashboard with attendance and GPA overview*
+#### Student Login
+![Student Login](screenshots/login-student.png)
+*Modern login interface for students with roll number authentication*
 
-### Teacher Dashboard
-<!-- Add screenshot: screenshots/teacher-dashboard.png -->
-![Teacher Dashboard](screenshots/teacher-dashboard.png)
-*Comprehensive teacher dashboard for managing students and attendance*
+#### Teacher Login
+![Teacher Login](screenshots/login-teacher.png)
+*Staff login portal with faculty ID authentication*
 
-### Admin Dashboard
-<!-- Add screenshot: screenshots/admin-dashboard.png -->
+#### Admin Login
+![Admin Login](screenshots/login-admin.png)
+*Administrative login with secure access control*
+
+</div>
+
+### Dashboards
+
+#### Admin Dashboard
 ![Admin Dashboard](screenshots/admin-dashboard.png)
-*Powerful admin interface for system-wide management*
+*Comprehensive admin dashboard with system overview and analytics*
 
-### Attendance Tracking
-<!-- Add screenshot: screenshots/attendance.png -->
-![Attendance Tracking](screenshots/attendance.png)
-*8-period attendance system with visual analytics*
+#### Teacher Dashboard
+![Teacher Dashboard](screenshots/teacher-dashboard.png)
+*Teacher portal for managing students, attendance, and marks*
 
-### Leave Request System
-<!-- Add screenshot: screenshots/leave-request.png -->
-![Leave Request](screenshots/leave-request.png)
-*Streamlined leave request and approval workflow*
-
-### Marks & Results
-<!-- Add screenshot: screenshots/results.png -->
-![Results](screenshots/results.png)
-*Detailed semester-wise results with GPA calculation*
-
-### Mobile Responsive
-<!-- Add screenshot: screenshots/mobile.png -->
-![Mobile View](screenshots/mobile.png)
-*Fully responsive design for mobile devices*
-
-> **Note:** To add screenshots, create a `screenshots/` folder in the project root and add your images there.
+> **Note:** More screenshots coming soon! (Student Dashboard, Attendance System, Leave Requests, Results)
 
 ---
 
