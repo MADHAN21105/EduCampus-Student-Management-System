@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎓 Admin Dashboard - EduCampus</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* Modern UI Enhancements */
+        .dashboard-container {
+            background: #ffffff;
+        }
+
+        .sidebar {
+            background: #1a237e;
+            border-right: 1px solid #303f9f;
+        }
+
+        .main-content {
+            padding: 2.5rem;
+            display: block;
+            overflow-y: auto;
+        }
+
+        .welcome-banner {
+            min-height: 200px;
+            margin: 0 0 2.5rem 0;
+            border-radius: 20px;
+            padding: 0 2rem;
+            color: white;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            border-bottom: 4px solid #2563eb;
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-card p {
+            color: #64748b;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .stat-card h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #1e293b;
+            margin: 0.5rem 0;
+        }
+
+        .section-card {
+            background: white;
+            border-radius: 20px;
+            padding: 1.5rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+            margin-bottom: 2.5rem;
+        }
+
+        .table-premium {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0 0.75rem;
+        }
+
+        .table-premium th {
+            padding: 1rem;
+            text-align: left;
+            color: #64748b;
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+
+        .table-premium tr {
+            background: #f8fafc;
+            transition: all 0.2s;
+        }
+
+        .table-premium tr:hover {
+            background: #f1f5f9;
+            transform: scale(1.002);
+        }
+
+        .table-premium td {
+            padding: 1.1rem 1rem;
+            color: #334155;
+        }
+
+        .table-premium td:first-child {
+            border-radius: 12px 0 0 12px;
+            font-weight: 600;
+        }
+
+        .table-premium td:last-child {
+            border-radius: 0 12px 12px 0;
+        }
+
+        .dashboard-layout {
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            gap: 2rem;
+        }
+
+        @media (max-width: 1200px) {
+            .dashboard-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo" style="color: white; margin-bottom: 3rem;">
+                <i class="fas fa-graduation-cap"></i> EduCampus
+            </div>
+
+            <div class="sidebar-section">
+                <h4
+                    style="color: rgba(255,255,255,0.4); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 1rem; padding-left: 1rem;">
+                    Management</h4>
+                <a href="#" class="sidebar-link active" onclick="showSection('dashboard-section', this)"><i
+                        class="fas fa-th-large"></i> Dashboard</a>
+                <a href="#" class="sidebar-link" onclick="showSection('students-section', this)"><i
+                        class="fas fa-user-graduate"></i> Students</a>
+                <a href="#" class="sidebar-link" onclick="showSection('teachers-section', this)"><i
+                        class="fas fa-chalkboard-teacher"></i> Teachers</a>
+                <a href="#" class="sidebar-link" onclick="showSection('subjects-section', this)"><i
+                        class="fas fa-book"></i> Subjects</a>
+            </div>
+
+            <div class="sidebar-section">
+                <a href="#" onclick="logout()" class="sidebar-link" style="margin-top: 4rem; color: #f87171;">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Dashboard Section -->
+            <div id="dashboard-section" class="content-section">
+                <!-- Welcome Banner -->
+                <!-- 🎊 Welcome Banner (Sidebar Blue Version) -->
+                <div class="welcome-banner"
+                    style="background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%); color: white; margin-bottom: 2.5rem; padding: 0 2rem; border-radius: 20px; display: flex; align-items: center; justify-content: space-between; position: relative; overflow: visible; height: 180px; box-shadow: 0 10px 30px rgba(26, 35, 126, 0.25);">
+
+                    <!-- Left: Illustration 1 -->
+                    <div class="banner-illustration"
+                        style="height: 100%; display: flex; align-items: center; position: relative; z-index: 1;">
+                        <img src="images/admin banner.png" alt="Welcome"
+                            style="height: 100%; width: auto; max-height: 100%; object-fit: contain; filter: drop-shadow(0 5px 15px rgba(0,0,0,0.3));">
+                    </div>
+
+                    <!-- Center: Welcome Text -->
+                    <div class="welcome-text"
+                        style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); text-align: center; z-index: 2; width: 100%; max-width: 600px;">
+                        <h1
+                            style="color: white; font-size: 3rem; font-weight: 800; margin-bottom: 0.5rem; letter-spacing: -0.5px; text-shadow: 0 2px 10px rgba(0,0,0,0.2);">
+                            Admin Portal</h1>
+                        <p
+                            style="color: rgba(255,255,255,0.9); font-size: 0.8rem; font-weight: 500; letter-spacing: 0.5px;margin-left: 6rem;">
+                            Manage institution data and system health with precision.
+                        </p>
+                    </div>
+
+                    <!-- Right: Illustration 2 -->
+                    <div class="banner-illustration"
+                        style="height: 100%; display: flex; align-items: center; position: relative; z-index: 1;margin-left:10rem;">
+                        <img src="images/admin banner 2.png" alt="Welcome"
+                            style="height: 93%; width: auto; max-height:93%;object-fit: contain; filter: drop-shadow(0 5px 15px rgba(0,0,0,0.3));margin-left:50rem;">
+                    </div>
+                </div>
+
+                <!-- 📊 Unified System Statistics Box (Profile Format) -->
+                <div class="card-v2"
+                    style="padding: 2.5rem; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); background: white; margin-bottom: 2.5rem; border-left: 5px solid #1a237e;">
+                    <div style="margin-bottom: 2rem;">
+                        <h3
+                            style="font-size: 1.6rem; font-weight: 800; color: #1e293b; display: flex; align-items: center; gap: 1rem;">
+                            <i class="fas fa-chart-line" style="color: #1a237e;"></i> System Overview
+                        </h3>
+                        <p
+                            style="color: #64748b; font-size: 1rem; font-weight: 500; margin-top: 0.5rem; border-bottom: 1px solid #f1f5f9; padding-bottom: 1rem;">
+                            Comprehensive overview of institution data and system health.
+                        </p>
+                    </div>
+
+                    <div
+                        style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-bottom: 2rem;">
+                        <div class="info-group">
+                            <label
+                                style="color: #64748b; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;">Total
+                                Students</label>
+                            <p id="totalStudents"
+                                style="font-weight: 800; padding: 1rem 0; border-bottom: 1px solid #f1f5f9; font-size: 1.8rem; color: #1e293b; margin: 0;">
+                                0</p>
+                        </div>
+                        <div class="info-group">
+                            <label
+                                style="color: #64748b; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;">Total
+                                Teachers</label>
+                            <p id="totalTeachers"
+                                style="font-weight: 800; padding: 1rem 0; border-bottom: 1px solid #f1f5f9; font-size: 1.8rem; color: #1e293b; margin: 0;">
+                                0</p>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 1rem;">
+                        <h4
+                            style="font-size: 0.85rem; font-weight: 800; color: #1a237e; margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 1.5px; display: flex; align-items: center; gap: 0.6rem;">
+                            <i class="fas fa-microchip" style="color: #10b981;"></i> System Insights
+                        </h4>
+                        <div
+                            style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem;">
+                            <div class="info-group">
+                                <label
+                                    style="color: #64748b; font-size: 0.8rem; font-weight: 700; text-transform: uppercase;">Attendance</label>
+                                <p id="attendanceOverview"
+                                    style="font-weight: 800; padding: 0.8rem 0; border-bottom: 1px solid #f1f5f9; font-size: 1.5rem; color: #15803d; margin: 0;">
+                                    0%</p>
+                            </div>
+                            <div class="info-group">
+                                <label
+                                    style="color: #64748b; font-size: 0.8rem; font-weight: 700; text-transform: uppercase;">Subjects</label>
+                                <p id="totalSubjects"
+                                    style="font-weight: 800; padding: 0.8rem 0; border-bottom: 1px solid #f1f5f9; font-size: 1.5rem; color: #1d4ed8; margin: 0;">
+                                    0</p>
+                            </div>
+                            <div class="info-group">
+                                <label
+                                    style="color: #64748b; font-size: 0.8rem; font-weight: 700; text-transform: uppercase;">Classes</label>
+                                <p id="totalClasses"
+                                    style="font-weight: 800; padding: 0.8rem 0; border-bottom: 1px solid #f1f5f9; font-size: 1.5rem; color: #7e22ce; margin: 0;">
+                                    0</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Department Performance (Full Width Monitoring) -->
+                <div class="card-v2" id="deptMonitoring"
+                    style="margin-bottom: 2.5rem; border-left: 5px solid #2563eb; padding: 2rem;">
+                    <div class="section-header"
+                        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; border-bottom: 1px solid #f1f5f9; padding-bottom: 1rem;">
+                        <h3
+                            style="font-size: 1.5rem; font-weight: 700; color: #1e293b; display: flex; align-items: center; gap: 0.75rem;">
+                            <i class="fas fa-chart-bar" style="color: #2563eb;"></i> Department Performance Monitoring
+                        </h3>
+                    </div>
+                    <div class="table-container">
+                        <table class="table-premium">
+                            <thead>
+                                <tr>
+                                    <th>Department</th>
+                                    <th>Avg CGPA</th>
+                                    <th>Performance Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="deptAveragesBody">
+                                <!-- Data will be loaded here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div> <!-- End Dashboard Section -->
+
+            <div id="students-section" class="content-section" style="display: none;">
+                <div class="welcome-banner"
+                    style="background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%); color: white; margin-bottom: 2.5rem; padding: 0 2rem; border-radius: 20px; display: flex; align-items: center; justify-content: space-between; position: relative; overflow: visible; height: 180px; box-shadow: 0 10px 30px rgba(26, 35, 126, 0.25);">
+
+                    <!-- Left: Illustration 1 -->
+                    <div class="banner-illustration"
+                        style="height: 100%; display: flex; align-items: center; position: relative; z-index: 1;">
+                        <img src="images/studennt 2 banner.png" alt="Welcome"
+                            style="height: 100%; width: auto; max-height: 100%; object-fit: contain; filter: drop-shadow(0 5px 15px rgba(0,0,0,0.3));">
+                    </div>
+
+                    <!-- Center: Welcome Text -->
+                    <div class="welcome-text"
+                        style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); text-align: center; z-index: 2; width: 100%; max-width: 600px;">
+                        <h1
+                            style="color: white; font-size: 3rem; font-weight: 800; margin-bottom: 0.5rem; letter-spacing: -0.5px; text-shadow: 0 2px 10px rgba(0,0,0,0.2);">
+                            Student Management</h1>
+                        <p
+                            style="color: rgba(255,255,255,0.9); font-size: 0.8rem; font-weight: 500; letter-spacing: 0.5px;margin-left: 6rem;">
+                            Comprehensive database and academic tracking for all registered students.
+                        </p>
+                    </div>
+
+                    <!-- Right: Illustration 2 -->
+                    <div class="banner-illustration"
+                        style="height: 100%; display: flex; align-items: center; position: relative; z-index: 1;margin-left:10rem;">
+                        <img src="images/student banner.png" alt="Welcome"
+                            style="height: 93%; width: auto; max-height:93%;object-fit: contain; filter: drop-shadow(0 5px 15px rgba(0,0,0,0.3));margin-left:50rem;">
+                    </div>
+                </div>
+
+                <!-- Student Records -->
+                <div class="section-card" id="studentsSection" style="border-left: 4px solid #2563eb; padding: 2.5rem;">
+                    <div
+                        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; border-bottom: 1px solid #f1f5f9; padding-bottom: 1rem;">
+                        <h3
+                            style="font-size: 1.5rem; font-weight: 700; color: #1e293b; display: flex; align-items: center; gap: 0.75rem;">
+                            <i class="fas fa-user-graduate" style="color: #2563eb;"></i> Student Records
+                        </h3>
+                        <button class="btn btn-primary" onclick="toggleStudentForm()"
+                            style="background: #2563eb; color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 10px; font-weight: 700; cursor: pointer; transition: all 0.2s; display: inline-flex; align-items: center; gap: 0.5rem;"><i
+                                class="fas fa-plus"></i> Add Student</button>
+                    </div>
+
+                    <!-- 🔍 Student Filter Bar -->
+                    <div
+                        style="background: #f8fafc; padding: 1.5rem; border-radius: 12px; margin-bottom: 2rem; display: flex; gap: 1.5rem; align-items: flex-end; border: 1px solid #e2e8f0;">
+                        <div style="flex: 1;">
+                            <label
+                                style="display: block; font-size: 0.8rem; font-weight: 700; color: #64748b; text-transform: uppercase; margin-bottom: 0.5rem;">Filter
+                                by Department</label>
+                            <select id="filter-std-dept" class="form-control"
+                                style="width: 100%; border-radius: 8px; border: 1px solid #cbd5e1; padding: 0.6rem;"
+                                onchange="fetchStudents()">
+                                <option value="">All Departments</option>
+                                <option value="Computer Science">Computer Science</option>
+                                <option value="Information Technology">Information Technology</option>
+                                <option value="Electronics & Communication">Electronics & Communication</option>
+                                <option value="Electrical Engineering">Electrical Engineering</option>
+                                <option value="Mechanical Engineering">Mechanical Engineering</option>
+                                <option value="Civil Engineering">Civil Engineering</option>
+                            </select>
+                        </div>
+                        <div style="flex: 1;">
+                            <label
+                                style="display: block; font-size: 0.8rem; font-weight: 700; color: #64748b; text-transform: uppercase; margin-bottom: 0.5rem;">Filter
+                                by Semester</label>
+                            <select id="filter-std-semester" class="form-control"
+                                style="width: 100%; border-radius: 8px; border: 1px solid #cbd5e1; padding: 0.6rem;"
+                                onchange="fetchStudents()">
+                                <option value="">All Semesters</option>
+                                <option value="1">1st Semester</option>
+                                <option value="2">2nd Semester</option>
+                                <option value="3">3rd Semester</option>
+                                <option value="4">4th Semester</option>
+                                <option value="5">5th Semester</option>
+                                <option value="6">6th Semester</option>
+                                <option value="7">7th Semester</option>
+                                <option value="8">8th Semester</option>
+                            </select>
+                        </div>
+                        <div
+                            style="background: #e0f2fe; padding: 0.6rem 1.2rem; border-radius: 8px; border: 1px solid #bae6fd; min-width: 140px; text-align: center;">
+                            <span
+                                style="font-size: 0.7rem; font-weight: 700; color: #0369a1; text-transform: uppercase; display: block; margin-bottom: 0.2rem;">Filtered
+                                Total</span>
+                            <span id="filteredStudentCount"
+                                style="font-size: 1.4rem; font-weight: 800; color: #0c4a6e;">0</span>
+                        </div>
+                    </div>
+
+                    <div id="studentForm"
+                        style="display: none; margin-bottom: 2rem; background: #f8fafc; padding: 2rem; border-radius: 16px; border: 1px solid #e2e8f0;">
+                        <form id="addStudentForm"
+                            style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;">
+                            <div class="form-group"><label
+                                    style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #475569;">Name</label><input
+                                    type="text" id="std-name" class="form-control"
+                                    style="width: 100%; padding: 0.75rem; border-radius: 8px; border: 1px solid #cbd5e1;"
+                                    required></div>
+                            <div class="form-group"><label
+                                    style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #475569;">Roll
+                                    No</label><input type="text" id="std-roll" class="form-control"
+                                    style="width: 100%; padding: 0.75rem; border-radius: 8px; border: 1px solid #cbd5e1;"
+                                    required></div>
+                            <div class="form-group"><label
+                                    style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #475569;">Email</label><input
+                                    type="email" id="std-email" class="form-control"
+                                    style="width: 100%; padding: 0.75rem; border-radius: 8px; border: 1px solid #cbd5e1;"
+                                    required></div>
+                            <div class="form-group"><label
+                                    style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #475569;">Phone</label><input
+                                    type="text" id="std-phone" class="form-control"
+                                    style="width: 100%; padding: 0.75rem; border-radius: 8px; border: 1px solid #cbd5e1;"
+                                    required></div>
+                            <div class="form-group"><label
+                                    style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #475569;">Gender</label>
+                                <select id="std-gender" class="form-control"
+                                    style="width: 100%; padding: 0.75rem; border-radius: 8px; border: 1px solid #cbd5e1;"
+                                    required>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group"><label
+                                    style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #475569;">DOB</label><input
+                                    type="date" id="std-dob" class="form-control"
+                                    style="width: 100%; padding: 0.75rem; border-radius: 8px; border: 1px solid #cbd5e1;"
+                                    required></div>
+                            <div class="form-group"><label
+                                    style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #475569;">Year</label><input
+                                    type="text" id="std-year" class="form-control"
+                                    style="width: 100%; padding: 0.75rem; border-radius: 8px; border: 1px solid #cbd5e1;"
+                                    required></div>
+                            <div class="form-group">
+                                <label
+                                    style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #475569;">Semester</label>
+                                <select id="std-semester" class="form-control"
+                                    style="width: 100%; padding: 0.75rem; border-radius: 8px; border: 1px solid #cbd5e1;"
+                                    required>
+                                    <option value="1">1st Semester</option>
+                                    <option value="2">2nd Semester</option>
+                                    <option value="3">3rd Semester</option>
+                                    <option value="4">4th Semester</option>
+                                    <option value="5">5th Semester</option>
+                                    <option value="6">6th Semester</option>
+                                    <option value="7">7th Semester</option>
+                                    <option value="8">8th Semester</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label
+                                    style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #475569;">Department</label>
+                                <select id="std-dept" class="form-control"
+                                    style="width: 100%; padding: 0.75rem; border-radius: 8px; border: 1px solid #cbd5e1;"
+                                    required>
+                                    <option value="Computer Science">Computer Science</option>
+                                    <option value="Information Technology">Information Technology</option>
+                                    <option value="Electronics & Communication">Electronics & Communication</option>
+                                    <option value="Electrical Engineering">Electrical Engineering</option>
+                                    <option value="Mechanical Engineering">Mechanical Engineering</option>
+                                    <option value="Civil Engineering">Civil Engineering</option>
+                                </select>
+                            </div>
+                            <div class="form-group"><label
+                                    style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #475569;">Blood
+                                    Group</label><input type="text" id="std-blood" class="form-control"
+                                    style="width: 100%; padding: 0.75rem; border-radius: 8px; border: 1px solid #cbd5e1;"
+                                    placeholder="e.g. O+"></div>
+                            <div class="form-group"><label
+                                    style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #475569;">Father's
+                                    Name</label><input type="text" id="std-father" class="form-control"
+                                    style="width: 100%; padding: 0.75rem; border-radius: 8px; border: 1px solid #cbd5e1;">
+                            </div>
+                            <div class="form-group"><label
+                                    style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #475569;">Mother's
+                                    Name</label><input type="text" id="std-mother" class="form-control"
+                                    style="width: 100%; padding: 0.75rem; border-radius: 8px; border: 1px solid #cbd5e1;">
+                            </div>
+                            <div class="form-group" style="grid-column: span 3;">
+                                <label
+                                    style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #475569;">Address</label>
+                                <textarea id="std-address" class="form-control" rows="2"
+                                    style="width: 100%; padding: 0.75rem; border-radius: 8px; border: 1px solid #cbd5e1;"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary"
+                                style="grid-column: span 3; background: #2563eb; color: white; border: none; padding: 1rem; border-radius: 10px; font-weight: 700; cursor: pointer;">Register
+                                Student</button>
+                        </form>
+                    </div>
+
+                    <div class="table-container">
+                        <table class="table-premium">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Roll No</th>
+                                    <th>Dept</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="studentTableBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div> <!-- End Students Section -->
+
+            <div id="teachers-section" class="content-section" style="display: none;">
+                <div class="welcome-banner"
+                    style="background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%); color: white; margin-bottom: 2.5rem; padding: 0 2rem; border-radius: 20px; display: flex; align-items: center; justify-content: space-between; position: relative; overflow: visible; height: 180px; box-shadow: 0 10px 30px rgba(26, 35, 126, 0.25);">
+
+                    <!-- Left: Illustration 1 -->
+                    <div class="banner-illustration"
+                        style="height: 100%; display: flex; align-items: center; position: relative; z-index: 1;">
+                        <img src="images/teacher-banner-illustration.png" alt="Welcome"
+                            style="height: 100%; width: auto; max-height: 100%; object-fit: contain; filter: drop-shadow(0 5px 15px rgba(0,0,0,0.3));">
+                    </div>
+
+                    <!-- Center: Welcome Text -->
+                    <div class="welcome-text"
+                        style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); text-align: center; z-index: 2; width: 100%; max-width: 600px;">
+                        <h1
+                            style="color: white; font-size: 3rem; font-weight: 800; margin-bottom: 0.5rem; letter-spacing: -0.5px; text-shadow: 0 2px 10px rgba(0,0,0,0.2);">
+                            Teacher Management</h1>
+                        <p
+                            style="color: rgba(255,255,255,0.9); font-size: 0.8rem; font-weight: 500; letter-spacing: 0.5px;margin-left: 6rem;">
+                            Faculty records and departmental allocation for educational excellence.
+                        </p>
+                    </div>
+
+                    <!-- Right: Illustration 2 -->
+                    <div class="banner-illustration"
+                        style="height: 100%; display: flex; align-items: center; position: relative; z-index: 1;margin-left:10rem;">
+                        <img src="images/teacher-banner-illustration.2.png" alt="Welcome"
+                            style="height: 93%; width: auto; max-height:93%;object-fit: contain; filter: drop-shadow(0 5px 15px rgba(0,0,0,0.3));margin-left:50rem;">
+                    </div>
+                </div>
+                <!-- Teacher Records -->
+                <div class="section-card" id="teachersSection" style="border-left: 4px solid #2563eb; padding: 2.5rem;">
+                    <div
+                        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; border-bottom: 1px solid #f1f5f9; padding-bottom: 1rem;">
+                        <h3
+                            style="font-size: 1.5rem; font-weight: 700; color: #1e293b; display: flex; align-items: center; gap: 0.75rem;">
+                            <i class="fas fa-chalkboard-teacher" style="color: #2563eb;"></i> Teacher Records
+                            <span id="filteredTeacherCount"
+                                style="background: #dbeafe; color: #1e40af; font-size: 0.85rem; padding: 0.2rem 0.8rem; border-radius: 999px; margin-left: 0.5rem;">0</span>
+                        </h3>
+                        <button class="btn btn-primary" onclick="toggleTeacherForm()"
+                            style="background: #2563eb; color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 10px; font-weight: 700; cursor: pointer; transition: all 0.2s; display: inline-flex; align-items: center; gap: 0.5rem;"><i
+                                class="fas fa-plus"></i> Add Teacher</button>
+                    </div>
+
+                    <!-- 🔍 Teacher Filter Bar -->
+                    <div
+                        style="background: #f8fafc; padding: 1.5rem; border-radius: 12px; margin-bottom: 2rem; display: flex; gap: 1.5rem; align-items: flex-end; border: 1px solid #e2e8f0;">
+                        <div style="flex: 1;">
+                            <label
+                                style="display: block; font-size: 0.8rem; font-weight: 700; color: #64748b; text-transform: uppercase; margin-bottom: 0.5rem;">Filter
+                                by Department</label>
+                            <select id="filter-teacher-dept" class="form-control"
+                                style="width: 100%; border-radius: 8px; border: 1px solid #cbd5e1; padding: 0.6rem;"
+                                onchange="fetchTeachers()">
+                                <option value="">All Departments</option>
+                                <option value="Computer Science">Computer Science</option>
+                                <option value="Information Technology">Information Technology</option>
+                                <option value="Electronics & Communication">Electronics & Communication</option>
+                                <option value="Electrical Engineering">Electrical Engineering</option>
+                                <option value="Mechanical Engineering">Mechanical Engineering</option>
+                                <option value="Civil Engineering">Civil Engineering</option>
+                            </select>
+                        </div>
+                        <div style="flex: 1;">
+                            <label
+                                style="display: block; font-size: 0.8rem; font-weight: 700; color: #64748b; text-transform: uppercase; margin-bottom: 0.5rem;">Filter
+                                by Specialization</label>
+                            <input type="text" id="filter-teacher-special" class="form-control"
+                                placeholder="Search e.g. Maths"
+                                style="width: 100%; border-radius: 8px; border: 1px solid #cbd5e1; padding: 0.6rem;"
+                                oninput="fetchTeachers()">
+                        </div>
+                    </div>
+
+                    <div id="teacherForm"
+                        style="display: none; margin-bottom: 2rem; background: #f8fafc; padding: 2rem; border-radius: 16px; border: 1px solid #e2e8f0;">
+                        <form id="addTeacherForm"
+                            style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem;">
+                            <div class="form-group"><label
+                                    style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #475569;">Name</label><input
+                                    type="text" id="t-name" class="form-control"
+                                    style="width: 100%; padding: 0.75rem; border-radius: 8px; border: 1px solid #cbd5e1;"
+                                    required></div>
+                            <div class="form-group"><label
+                                    style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #475569;">Faculty
+                                    ID</label><input type="text" id="t-faculty-id" class="form-control"
+                                    style="width: 100%; padding: 0.75rem; border-radius: 8px; border: 1px solid #cbd5e1;"
+                                    required></div>
+                            <div class="form-group"><label
+                                    style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #475569;">Email</label><input
+                                    type="email" id="t-email" class="form-control"
+                                    style="width: 100%; padding: 0.75rem; border-radius: 8px; border: 1px solid #cbd5e1;"
+                                    required></div>
+                            <div class="form-group"><label
+                                    style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #475569;">Phone</label><input
+                                    type="text" id="t-phone" class="form-control"
+                                    style="width: 100%; padding: 0.75rem; border-radius: 8px; border: 1px solid #cbd5e1;"
+                                    required></div>
+                            <div class="form-group"><label
+                                    style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #475569;">Date
+                                    of Birth</label><input type="date" id="t-dob" class="form-control"
+                                    style="width: 100%; padding: 0.75rem; border-radius: 8px; border: 1px solid #cbd5e1;"
+                                    required></div>
+                            <div class="form-group"><label
+                                    style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #475569;">Gender</label>
+                                <select id="t-gender" class="form-control"
+                                    style="width: 100%; padding: 0.75rem; border-radius: 8px; border: 1px solid #cbd5e1;"
+                                    required>
+                                    <option value="">Select Gender</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group"><label
+                                    style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #475569;">Specialization</label><input
+                                    type="text" id="t-special" class="form-control"
+                                    style="width: 100%; padding: 0.75rem; border-radius: 8px; border: 1px solid #cbd5e1;"
+                                    required></div>
+                            <div class="form-group"><label
+                                    style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #475569;">Department</label>
+                                <select id="t-dept" class="form-control"
+                                    style="width: 100%; padding: 0.75rem; border-radius: 8px; border: 1px solid #cbd5e1;"
+                                    required>
+                                    <option value="Computer Science">Computer Science</option>
+                                    <option value="Information Technology">Information Technology</option>
+                                    <option value="Electronics & Communication">Electronics & Communication</option>
+                                    <option value="Electrical Engineering">Electrical Engineering</option>
+                                    <option value="Mechanical Engineering">Mechanical Engineering</option>
+                                    <option value="Civil Engineering">Civil Engineering</option>
+                                </select>
+                            </div>
+                            <div class="form-group"><label
+                                    style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #475569;">Blood
+                                    Group</label>
+                                <select id="t-blood" class="form-control"
+                                    style="width: 100%; padding: 0.75rem; border-radius: 8px; border: 1px solid #cbd5e1;">
+                                    <option value="">Select</option>
+                                    <option value="A+">A+</option>
+                                    <option value="A-">A-</option>
+                                    <option value="B+">B+</option>
+                                    <option value="B-">B-</option>
+                                    <option value="O+">O+</option>
+                                    <option value="O-">O-</option>
+                                    <option value="AB+">AB+</option>
+                                    <option value="AB-">AB-</option>
+                                </select>
+                            </div>
+                            <div class="form-group"><label
+                                    style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #475569;">Father's
+                                    Name</label><input type="text" id="t-father" class="form-control"
+                                    style="width: 100%; padding: 0.75rem; border-radius: 8px; border: 1px solid #cbd5e1;">
+                            </div>
+                            <div class="form-group"><label
+                                    style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #475569;">Mother's
+                                    Name</label><input type="text" id="t-mother" class="form-control"
+                                    style="width: 100%; padding: 0.75rem; border-radius: 8px; border: 1px solid #cbd5e1;">
+                            </div>
+                            <div class="form-group" style="grid-column: span 2;"><label
+                                    style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #475569;">Address</label>
+                                <textarea id="t-address" class="form-control" rows="2"
+                                    style="width: 100%; padding: 0.75rem; border-radius: 8px; border: 1px solid #cbd5e1;"
+                                    placeholder="Full Address"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary"
+                                style="grid-column: span 2; background: #2563eb; color: white; border: none; padding: 1rem; border-radius: 10px; font-weight: 700; cursor: pointer;">Register
+                                Teacher</button>
+                        </form>
+                    </div>
+
+                    <div class="table-container">
+                        <table class="table-premium">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Dept</th>
+                                    <th>Specialization</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="teacherTableBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div> <!-- End Teachers Section -->
+
+            <div id="subjects-section" class="content-section" style="display: none;">
+                <div class="welcome-banner"
+                    style="background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%); color: white; margin-bottom: 2.5rem; padding: 0 2rem; border-radius: 20px; display: flex; align-items: center; justify-content: space-between; position: relative; overflow: visible; height: 180px; box-shadow: 0 10px 30px rgba(26, 35, 126, 0.25);">
+
+                    <!-- Left: Illustration 1 -->
+                    <div class="banner-illustration"
+                        style="height: 100%; display: flex; align-items: center; position: relative; z-index: 1;">
+                        <img src="images/admin banner.png" alt="Welcome"
+                            style="height: 100%; width: auto; max-height: 100%; object-fit: contain; filter: drop-shadow(0 5px 15px rgba(0,0,0,0.3));">
+                    </div>
+
+                    <!-- Center: Welcome Text -->
+                    <div class="welcome-text"
+                        style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); text-align: center; z-index: 2; width: 100%; max-width: 600px;">
+                        <h1
+                            style="color: white; font-size: 3rem; font-weight: 800; margin-bottom: 0.5rem; letter-spacing: -0.5px; text-shadow: 0 2px 10px rgba(0,0,0,0.2);">
+                            Subject Portfolio</h1>
+                        <p
+                            style="color: rgba(255,255,255,0.9); font-size: 0.8rem; font-weight: 500; letter-spacing: 0.5px;margin-left: 6rem ;">
+                            Curriculum management and institutional course structural oversight.
+                        </p>
+                    </div>
+
+                    <!-- Right: Illustration 2 -->
+                    <div class="banner-illustration"
+                        style="height: 100%; display: flex; align-items: center; position: relative; z-index: 1;margin-left:10rem;">
+                        <img src="images/admin banner 2.png" alt="Welcome"
+                            style="height: 93%; width: auto; max-height:93%;object-fit: contain; filter: drop-shadow(0 5px 15px rgba(0,0,0,0.3));margin-left:50rem;">
+                    </div>
+                </div>
+                <div class="section-card" style="border-left: 4px solid #2563eb; padding: 2.5rem;">
+                    <div
+                        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; border-bottom: 1px solid #f1f5f9; padding-bottom: 1rem;">
+                        <h3
+                            style="font-size: 1.5rem; font-weight: 700; color: #1e293b; display: flex; align-items: center; gap: 0.75rem;">
+                            <i class="fas fa-book" style="color: #2563eb;"></i> Subject Management
+                            <span id="filteredSubjectCount"
+                                style="background: #dbeafe; color: #1e40af; font-size: 0.85rem; padding: 0.2rem 0.8rem; border-radius: 999px; margin-left: 0.5rem;">0</span>
+                        </h3>
+                        <button class="btn btn-primary" onclick="toggleSubjectForm()"
+                            style="background: #2563eb; color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 10px; font-weight: 700; cursor: pointer; transition: all 0.2s; display: inline-flex; align-items: center; gap: 0.5rem;"><i
+                                class="fas fa-plus"></i> Add Subject</button>
+                    </div>
+
+                    <!-- 🔍 Subject Filter Bar -->
+                    <div
+                        style="background: #f8fafc; padding: 1.5rem; border-radius: 12px; margin-bottom: 2rem; display: flex; gap: 1.5rem; align-items: flex-end; border: 1px solid #e2e8f0;">
+                        <div style="flex: 1;">
+                            <label
+                                style="display: block; font-size: 0.8rem; font-weight: 700; color: #64748b; text-transform: uppercase; margin-bottom: 0.5rem;">Filter
+                                by Department</label>
+                            <select id="filter-sub-dept" class="form-control"
+                                style="width: 100%; border-radius: 8px; border: 1px solid #cbd5e1; padding: 0.6rem;"
+                                onchange="fetchSubjects()">
+                                <option value="">All Departments</option>
+                                <option value="Computer Science">Computer Science</option>
+                                <option value="Information Technology">Information Technology</option>
+                                <option value="Electronics & Communication">Electronics & Communication</option>
+                                <option value="Electrical Engineering">Electrical Engineering</option>
+                                <option value="Mechanical Engineering">Mechanical Engineering</option>
+                                <option value="Civil Engineering">Civil Engineering</option>
+                            </select>
+                        </div>
+                        <div style="flex: 1;">
+                            <label
+                                style="display: block; font-size: 0.8rem; font-weight: 700; color: #64748b; text-transform: uppercase; margin-bottom: 0.5rem;">Filter
+                                by Semester</label>
+                            <select id="filter-sub-semester" class="form-control"
+                                style="width: 100%; border-radius: 8px; border: 1px solid #cbd5e1; padding: 0.6rem;"
+                                onchange="fetchSubjects()">
+                                <option value="">All Semesters</option>
+                                <option value="1">1st Semester</option>
+                                <option value="2">2nd Semester</option>
+                                <option value="3">3rd Semester</option>
+                                <option value="4">4th Semester</option>
+                                <option value="5">5th Semester</option>
+                                <option value="6">6th Semester</option>
+                                <option value="7">7th Semester</option>
+                                <option value="8">8th Semester</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div id="subjectForm"
+                        style="display: none; margin-bottom: 2rem; background: #f8fafc; padding: 2rem; border-radius: 16px; border: 1px solid #e2e8f0;">
+                        <form id="addSubjectForm"
+                            style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem;">
+                            <div class="form-group"><label
+                                    style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #475569;">Subject
+                                    Name</label>
+                                <input type="text" id="s-name" class="form-control"
+                                    style="width: 100%; padding: 0.75rem; border-radius: 8px; border: 1px solid #cbd5e1;"
+                                    required>
+                            </div>
+                            <div class="form-group"><label
+                                    style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #475569;">Subject
+                                    Code</label>
+                                <input type="text" id="s-code" class="form-control"
+                                    style="width: 100%; padding: 0.75rem; border-radius: 8px; border: 1px solid #cbd5e1;"
+                                    required>
+                            </div>
+                            <div class="form-group"><label
+                                    style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #475569;">Department</label>
+                                <select id="s-dept" class="form-control"
+                                    style="width: 100%; padding: 0.75rem; border-radius: 8px; border: 1px solid #cbd5e1;"
+                                    required>
+                                    <option value="Computer Science">Computer Science</option>
+                                    <option value="Information Technology">Information Technology</option>
+                                    <option value="Electronics & Communication">Electronics & Communication</option>
+                                    <option value="Electrical Engineering">Electrical Engineering</option>
+                                    <option value="Mechanical Engineering">Mechanical Engineering</option>
+                                    <option value="Civil Engineering">Civil Engineering</option>
+                                </select>
+                            </div>
+                            <div class="form-group"><label
+                                    style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #475569;">Semester</label>
+                                <select id="s-sem" class="form-control"
+                                    style="width: 100%; padding: 0.75rem; border-radius: 8px; border: 1px solid #cbd5e1;"
+                                    required>
+                                    <option value="1">Semester 1</option>
+                                    <option value="2">Semester 2</option>
+                                    <option value="3">Semester 3</option>
+                                    <option value="4">Semester 4</option>
+                                    <option value="5">Semester 5</option>
+                                    <option value="6">Semester 6</option>
+                                    <option value="7">Semester 7</option>
+                                    <option value="8">Semester 8</option>
+                                </select>
+                            </div>
+                            <div class="form-group"><label
+                                    style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #475569;">Credits</label>
+                                <input type="number" id="s-credits" class="form-control"
+                                    style="width: 100%; padding: 0.75rem; border-radius: 8px; border: 1px solid #cbd5e1;"
+                                    min="1" max="10" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary"
+                                style="grid-column: span 2; background: #2563eb; color: white; border: none; padding: 1rem; border-radius: 10px; font-weight: 700; cursor: pointer;">Add
+                                Subject</button>
+                        </form>
+                    </div>
+
+                    <div class="table-container">
+                        <table class="table-premium">
+                            <thead>
+                                <tr>
+                                    <th>Subject Name</th>
+                                    <th>Code</th>
+                                    <th>Dept</th>
+                                    <th>Sem</th>
+                                    <th>Credits</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="subjectTableBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+
+        </main>
+    </div>
+
+    <script src="js/error-handler.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+
+</html>

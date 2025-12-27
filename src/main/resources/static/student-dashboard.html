@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎓 Student Dashboard - EduCampus</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo" style="color: white; margin-bottom: 3rem;">
+                <i class="fas fa-graduation-cap"></i> EduCampus
+            </div>
+
+            <div class="sidebar-section">
+                <a href="#" class="sidebar-link active" onclick="showSection('profile-section', this)">
+                    <i class="fas fa-user-circle"></i> Profile
+                </a>
+                <a href="#" class="sidebar-link" onclick="showSection('results-section', this)">
+                    <i class="fas fa-file-alt"></i> Semester Result
+                </a>
+                <a href="#" class="sidebar-link" onclick="showSection('attendance-section', this)">
+                    <i class="fas fa-calendar-check"></i> Attendance History
+                </a>
+                <a href="#" class="sidebar-link" onclick="showSection('leave-request-section', this)">
+                    <i class="fas fa-file-medical"></i> Leave Request
+                </a>
+            </div>
+
+            <div class="sidebar-section">
+                <a href="#" onclick="logout()" class="sidebar-link" style="margin-top: 2rem; color: #ff8a80;">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Unified Welcome Banner with Stats -->
+            <!-- Unified Welcome Banner with Stats -->
+            <!-- 🎊 Welcome Banner (Sidebar Blue Version) -->
+            <div class="welcome-banner"
+                style="background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%); color: white; margin-bottom: 2.5rem; padding: 0 2rem; border-radius: 20px; display: flex; align-items: center; justify-content: space-between; position: relative; overflow: visible; height: 180px; box-shadow: 0 10px 30px rgba(26, 35, 126, 0.25);">
+
+                <!-- Left: Illustration 1 -->
+                <div class="banner-illustration"
+                    style="height: 100%; display: flex; align-items: center; position: relative; z-index: 1;">
+                    <img src="images/studennt%202%20banner.png" alt="Welcome"
+                        style="height: 140%; width: auto; max-height: 140%; object-fit: contain; filter: drop-shadow(0 5px 15px rgba(0,0,0,0.3));">
+                </div>
+
+                <!-- Center: Welcome Text -->
+                <div class="welcome-text"
+                    style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); text-align: center; z-index: 2; width: 100%; max-width: 600px;">
+                    <h1
+                        style="color: white; font-size: 3rem; font-weight: 800; margin-bottom: 0.5rem; letter-spacing: -0.5px; text-shadow: 0 2px 10px rgba(0,0,0,0.2);">
+                        Welcome students!</h1>
+                    <p
+                        style="color: rgba(255,255,255,0.9); font-size: 0.8rem; font-weight: 500; letter-spacing: 0.5px;margin-left: 6rem;">
+                        Track your progress and manage your academic profile.
+                    </p>
+                </div>
+
+                <!-- Right: Illustration 2 -->
+                <div class="banner-illustration"
+                    style="height: 100%; display: flex; align-items: center; position: relative; z-index: 1;">
+                    <img src="images/student%20banner.png" alt="Welcome"
+                        style="height: 110%; width: auto; max-height: 110%; object-fit: contain; filter: drop-shadow(0 5px 15px rgba(0,0,0,0.3));">
+                </div>
+            </div>
+
+            <!-- Profile Section -->
+            <div id="profile-section" class="content-section">
+                <div class="card-v2"
+                    style="width: 100%; margin: 0; position: relative; border-left: 4px solid #2563eb;">
+                    <div style="text-align: center; margin-bottom: 2rem; position: relative;">
+                        <div style="text-align: center; margin-bottom: 2rem;">
+                            <!-- Welcome/Roll -->
+                            <div>
+                                <h1 id="profileCardGreeting"
+                                    style="color: #1e293b; font-size: 2rem; font-weight: 800; margin-bottom: 0.5rem;">
+                                    My Profile
+                                </h1>
+                                <p style="color: var(--text-muted); font-weight: 600; margin: 0; font-size: 1.1rem;">
+                                    <span id="profile-roll"></span> | <span id="display-email"></span>
+                                </p>
+                                <span id="display-name" style="display:none;"></span>
+                            </div>
+                        </div>
+
+                        <div
+                            style="position: absolute; right: 0; top: 0; display: flex; align-items: center; gap: 1.5rem;">
+                            <!-- Compact Banner Stats (Moved) -->
+                            <div class="banner-stats"
+                                style="display: flex; gap: 1rem; align-items: center; padding: 0.5rem 1rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+
+                                <!-- Attendance Stat -->
+                                <div style="text-align: right; border-right: 1px solid #cbd5e1; padding-right: 1rem;">
+                                    <p
+                                        style="font-size: 0.65rem; color: #64748b; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600; margin-bottom: 0.1rem;">
+                                        Attendance</p>
+                                    <h2 id="attendancePercentage"
+                                        style="color: #059669; font-size: 1.1rem; margin: 0; font-weight: 800;">0</h2>
+                                </div>
+
+                                <!-- CGPA Stat -->
+                                <div style="text-align: right;">
+                                    <p
+                                        style="font-size: 0.65rem; color: #64748b; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600; margin-bottom: 0.1rem;">
+                                        CGPA</p>
+                                    <h2 id="cgpa-text"
+                                        style="color: #d97706; font-size: 1.1rem; margin: 0; font-weight: 800;">
+                                        0.00</h2>
+                                </div>
+                            </div>
+                            <button id="edit-profile-btn" class="btn btn-outline" onclick="toggleProfileEdit(true)"
+                                style="padding: 0.5rem 1rem; font-size: 0.8rem;">
+                                <i class="fas fa-edit"></i> Edit Profile
+                            </button>
+                            <div id="edit-profile-actions" style="display: none; gap: 0.5rem;">
+                                <button class="btn btn-primary" onclick="saveProfile()"
+                                    style="padding: 0.5rem 1rem; font-size: 0.8rem;">
+                                    <i class="fas fa-save"></i> Save
+                                </button>
+                                <button class="btn btn-outline" onclick="toggleProfileEdit(false)"
+                                    style="padding: 0.5rem 1rem; font-size: 0.8rem; border-color: #ef4444; color: #ef4444;">
+                                    <i class="fas fa-times"></i> Cancel
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid-2"
+                        style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; padding: 0.5rem; max-width: 1000px; margin: 0 auto;">
+                        <div class="info-group">
+                            <label style="color: var(--text-muted); font-size: 0.85rem;">Email Address</label>
+                            <p id="profile-email"
+                                style="font-weight: 600; padding: 1.2rem 0; border-bottom: 1px solid #f1f5f9; font-size: 1.1rem;">
+                            </p>
+                        </div>
+                        <div class="info-group">
+                            <label style="color: var(--text-muted); font-size: 0.85rem;">Phone Number</label>
+                            <p id="profile-phone"
+                                style="font-weight: 600; padding: 1.2rem 0; border-bottom: 1px solid #f1f5f9; font-size: 1.1rem;">
+                            </p>
+                        </div>
+                        <div class="info-group">
+                            <label style="color: var(--text-muted); font-size: 0.85rem;">Date of Birth</label>
+                            <p id="profile-dob"
+                                style="font-weight: 600; padding: 1.2rem 0; border-bottom: 1px solid #f1f5f9; font-size: 1.1rem;">
+                            </p>
+                        </div>
+                        <div class="info-group">
+                            <label style="color: var(--text-muted); font-size: 0.85rem;">Gender</label>
+                            <p id="profile-gender"
+                                style="font-weight: 600; padding: 1.2rem 0; border-bottom: 1px solid #f1f5f9; font-size: 1.1rem;">
+                            </p>
+                        </div>
+                        <div class="info-group">
+                            <label style="color: var(--text-muted); font-size: 0.85rem;">Department</label>
+                            <p id="profile-dept"
+                                style="font-weight: 600; padding: 1.2rem 0; border-bottom: 1px solid #f1f5f9; font-size: 1.1rem;">
+                            </p>
+                        </div>
+                        <div class="info-group">
+                            <label style="color: var(--text-muted); font-size: 0.85rem;">Class / Year</label>
+                            <p id="profile-year"
+                                style="font-weight: 600; padding: 1.2rem 0; border-bottom: 1px solid #f1f5f9; font-size: 1.1rem;">
+                            </p>
+                        </div>
+                        <div class="info-group">
+                            <label style="color: var(--text-muted); font-size: 0.85rem;">Blood Group</label>
+                            <p id="profile-blood"
+                                style="font-weight: 600; padding: 1.2rem 0; border-bottom: 1px solid #f1f5f9; font-size: 1.1rem;">
+                            </p>
+                        </div>
+                        <div class="info-group">
+                            <label style="color: var(--text-muted); font-size: 0.85rem;">Father's Name</label>
+                            <p id="profile-father"
+                                style="font-weight: 600; padding: 1.2rem 0; border-bottom: 1px solid #f1f5f9; font-size: 1.1rem;">
+                            </p>
+                        </div>
+                        <div class="info-group">
+                            <label style="color: var(--text-muted); font-size: 0.85rem;">Mother's Name</label>
+                            <p id="profile-mother"
+                                style="font-weight: 600; padding: 1.2rem 0; border-bottom: 1px solid #f1f5f9; font-size: 1.1rem;">
+                            </p>
+                        </div>
+                        <div class="info-group" style="grid-column: span 3;">
+                            <label style="color: var(--text-muted); font-size: 0.85rem;">Address</label>
+                            <p id="profile-address"
+                                style="font-weight: 600; padding: 1.2rem 0; border-bottom: 1px solid #f1f5f9; font-size: 1.1rem;">
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Semester Result Section -->
+            <div id="results-section" class="content-section" style="display: none;">
+                <div class="card-v2"
+                    style="width: 100%; margin: 0; position: relative; border-left: 4px solid #2563eb;">
+                    <div
+                        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; flex-wrap: wrap; gap: 2rem;">
+                        <h3 style="font-size: 1.75rem; font-weight: 700; color: #1e293b;">Detailed Scores</h3>
+                        <div
+                            style="display: flex; align-items: center; gap: 2rem; background: #f8fafc; padding: 1rem 1.5rem; border-radius: 12px; font-size: 1.1rem; border: 2px solid #e2e8f0;">
+                            <span style="font-weight: 700; color: var(--primary); font-size: 1.2rem;">GPA: <span
+                                    id="sem-gpa">0.00</span></span>
+                            <span style="font-weight: 700; color: #059669; font-size: 1.2rem;">Credits: <span
+                                    id="sem-credits">0</span></span>
+                            <select id="resultSemester" name="resultSemester" class="form-control"
+                                style="width: auto; padding: 0.5rem 1rem; font-size: 1rem; border-radius: 8px;"
+                                onchange="fetchSemesterResults()">
+                                <option value="1">Semester 1</option>
+                                <option value="2">Semester 2</option>
+                                <option value="3">Semester 3</option>
+                                <option value="4">Semester 4</option>
+                                <option value="5">Semester 5</option>
+                                <option value="6">Semester 6</option>
+                                <option value="7">Semester 7</option>
+                                <option value="8">Semester 8</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div style="overflow-x: auto;">
+                        <table style="width: 100%; border-collapse: collapse; text-align: left;">
+                            <thead>
+                                <tr style="background: #f1f5f9; color: #475569; font-size: 1rem;">
+                                    <th style="padding: 1.25rem; border-radius: 8px 0 0 8px; font-weight: 700;">
+                                        Subject</th>
+                                    <th style="padding: 1.25rem; font-weight: 700;">Credits</th>
+                                    <th style="padding: 1.25rem; font-weight: 700;">Marks</th>
+                                    <th style="padding: 1.25rem; border-radius: 0 8px 8px 0; font-weight: 700;">
+                                        Grade</th>
+                                </tr>
+                            </thead>
+                            <tbody id="semesterResultsBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Attendance History Section -->
+            <div id="attendance-section" class="content-section" style="display: none;">
+                <div class="card-v2"
+                    style="margin-bottom: 2rem; border-top: 3px solid #3b82f6; border-left: 4px solid #2563eb; padding: 2rem; position: relative;">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg"
+                        style="position: absolute; right: 2rem; top: 1.5rem; width: 24px; cursor: pointer;" alt="PDF">
+                    <div style="margin-bottom: 2rem;">
+                        <label
+                            style="display: block; font-weight: 700; font-size: 0.9rem; color: #1e293b; margin-bottom: 0.5rem;">Semester<span
+                                style="color: #ef4444;">*</span></label>
+                        <div style="display: flex; align-items: center; gap: 2rem;">
+                            <select id="attendanceSemester" class="form-control"
+                                style="width: 250px; background: white; border: 1px solid #cbd5e1; border-radius: 4px; padding: 0.5rem;"
+                                onchange="fetchStudentAttendance()">
+                                <option value="1">I Semester</option>
+                                <option value="2">II Semester</option>
+                                <option value="3">III Semester</option>
+                                <option value="4">IV Semester</option>
+                                <option value="5">V Semester</option>
+                                <option value="6">VI Semester</option>
+                                <option value="7">VII Semester</option>
+                                <option value="8">VIII Semester</option>
+                            </select>
+                            <div id="attendance-eligibility"
+                                style="padding: 0.3rem 1.2rem; border-radius: 4px; font-weight: 700; font-size: 0.85rem; letter-spacing: 0.5px;">
+                                CHECKING ELIGIBILITY...</div>
+                        </div>
+                    </div>
+
+                    <div
+                        style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin-bottom: 2rem;">
+                        <div
+                            style="background: white; padding: 1.5rem; border-radius: 8px; border: 1px solid #e2e8f0; text-align: center; border-top: 4px solid #22c55e;">
+                            <div
+                                style="font-size: 0.8rem; font-weight: 700; color: #64748b; text-transform: uppercase; margin-bottom: 0.5rem;">
+                                Present (Hours)</div>
+                            <div id="att-present" style="font-size: 2.2rem; font-weight: 800; color: #1e293b;">0</div>
+                            <div style="font-size: 0.75rem; color: #22c55e; font-weight: 600; margin-top: 0.5rem;">+ OD
+                                & ML</div>
+                        </div>
+                        <div
+                            style="background: white; padding: 1.5rem; border-radius: 8px; border: 1px solid #e2e8f0; text-align: center; border-top: 4px solid #ef4444;">
+                            <div
+                                style="font-size: 0.8rem; font-weight: 700; color: #64748b; text-transform: uppercase; margin-bottom: 0.5rem;">
+                                Absent (Hours)</div>
+                            <div id="att-absent" style="font-size: 2.2rem; font-weight: 800; color: #1e293b;">0</div>
+                            <div style="font-size: 0.75rem; color: #ef4444; font-weight: 600; margin-top: 0.5rem;">
+                                Deducted</div>
+                        </div>
+                        <div
+                            style="background: white; padding: 1.5rem; border-radius: 8px; border: 1px solid #e2e8f0; text-align: center; border-top: 4px solid #3b82f6;">
+                            <div
+                                style="font-size: 0.8rem; font-weight: 700; color: #64748b; text-transform: uppercase; margin-bottom: 0.5rem;">
+                                Worked (Hours)</div>
+                            <div id="att-worked" style="font-size: 2.2rem; font-weight: 800; color: #1e293b;">0</div>
+                            <div style="font-size: 0.75rem; color: #3b82f6; font-weight: 600; margin-top: 0.5rem;">Total
+                                Potential</div>
+                        </div>
+                        <div
+                            style="background: white; padding: 1.5rem; border-radius: 8px; border: 1px solid #e2e8f0; text-align: center; border-top: 4px solid #2563eb;">
+                            <div
+                                style="font-size: 0.8rem; font-weight: 700; color: #64748b; text-transform: uppercase; margin-bottom: 0.5rem;">
+                                Attendance %</div>
+                            <div id="att-percent" style="font-size: 2.2rem; font-weight: 800; color: #2563eb;">0%</div>
+                            <div style="font-size: 0.75rem; color: #64748b; font-weight: 600; margin-top: 0.5rem;">
+                                Target: 75%</div>
+                        </div>
+                    </div>
+
+                    <div
+                        style="background: #f8fafc; border-radius: 8px; padding: 1.5rem; display: flex; justify-content: space-around; border: 1px solid #e2e8f0; margin-bottom: 2rem;">
+                        <div style="text-align: center;">
+                            <div id="att-open-date" style="font-weight: 700; font-size: 1.1rem; color: #1e293b;">N/A
+                            </div>
+                            <div
+                                style="font-size: 0.7rem; color: #64748b; font-weight: 700; margin-top: 0.2rem; text-transform: uppercase;">
+                                Open Date</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div id="att-close-date" style="font-weight: 700; font-size: 1.1rem; color: #1e293b;">N/A
+                            </div>
+                            <div
+                                style="font-size: 0.7rem; color: #64748b; font-weight: 700; margin-top: 0.2rem; text-transform: uppercase;">
+                                Close Date</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div id="att-od-val" style="font-weight: 700; font-size: 1.1rem; color: #1e293b;">0</div>
+                            <div
+                                style="font-size: 0.7rem; color: #64748b; font-weight: 700; margin-top: 0.2rem; text-transform: uppercase;">
+                                On Duty</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div id="att-ml-val" style="font-weight: 700; font-size: 1.1rem; color: #1e293b;">0</div>
+                            <div
+                                style="font-size: 0.7rem; color: #64748b; font-weight: 700; margin-top: 0.2rem; text-transform: uppercase;">
+                                Medical Leave</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-v2" style="margin-bottom: 1.5rem; padding: 1rem;">
+                    <div style="display: flex; gap: 1.5rem; font-size: 0.8rem; flex-wrap: wrap;">
+                        <div style="display: flex; align-items: center; gap: 0.5rem;"><span
+                                style="width: 20px; height: 20px; border-radius: 4px; background: #22c55e; color: white; display: flex; align-items: center; justify-content: center; font-weight: bold;">P</span>
+                            Present</div>
+                        <div style="display: flex; align-items: center; gap: 0.5rem;"><span
+                                style="width: 20px; height: 20px; border-radius: 4px; background: #ef4444; color: white; display: flex; align-items: center; justify-content: center; font-weight: bold;">A</span>
+                            Absent</div>
+                        <div style="display: flex; align-items: center; gap: 0.5rem;"><span
+                                style="width: 20px; height: 20px; border-radius: 4px; background: #3b82f6; color: white; display: flex; align-items: center; justify-content: center; font-weight: bold;">OD</span>
+                            On Duty</div>
+                        <div style="display: flex; align-items: center; gap: 0.5rem;"><span
+                                style="width: 20px; height: 20px; border-radius: 4px; background: #f59e0b; color: white; display: flex; align-items: center; justify-content: center; font-weight: bold;">ML</span>
+                            Medical Leave</div>
+                        <div style="display: flex; align-items: center; gap: 0.5rem;"><span
+                                style="width: 20px; height: 20px; border-radius: 4px; background: #e2e8f0; color: #64748b; display: flex; align-items: center; justify-content: center; font-weight: bold;">–</span>
+                            Not Taken</div>
+                    </div>
+                </div>
+
+                <div class="card-v2">
+                    <h3 style="margin-bottom: 1rem;">Day-wise & Period-wise Details</h3>
+                    <div id="attendanceDashboard" style="overflow-x: auto;">
+                        <table
+                            style="width: 100%; border-collapse: collapse; text-align: center; border: 1px solid #f1f5f9;">
+                            <thead>
+                                <tr style="background: #f8fafc; color: #475569; font-size: 0.8rem;">
+                                    <th style="padding: 1rem; border: 1px solid #f1f5f9; text-align: left;">Date</th>
+                                    <th style="padding: 1rem; border: 1px solid #f1f5f9; text-align: left;">Day</th>
+                                    <th style="padding: 1rem; border: 1px solid #f1f5f9;">Description</th>
+                                    <th style="padding: 1rem; border: 1px solid #f1f5f9;">Day Type</th>
+                                    <th style="padding: 1rem; border: 1px solid #f1f5f9;">P1</th>
+                                    <th style="padding: 1rem; border: 1px solid #f1f5f9;">P2</th>
+                                    <th style="padding: 1rem; border: 1px solid #f1f5f9;">P3</th>
+                                    <th style="padding: 1rem; border: 1px solid #f1f5f9;">P4</th>
+                                    <th style="padding: 1rem; border: 1px solid #f1f5f9;">P5</th>
+                                    <th style="padding: 1rem; border: 1px solid #f1f5f9;">P6</th>
+                                    <th style="padding: 1rem; border: 1px solid #f1f5f9;">P7</th>
+                                    <th style="padding: 1rem; border: 1px solid #f1f5f9;">P8</th>
+                                </tr>
+                            </thead>
+                            <tbody id="attendanceDashboardBody">
+                                <tr>
+                                    <td colspan="12" style="padding: 3rem; color: var(--text-muted);">
+                                        <i class="fas fa-spinner fa-spin"></i> Loading Attendance Data...
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Leave Requests Section -->
+            <div id="leave-request-section" class="content-section"
+                style="display: none; width: 100%; margin: 0; padding: 2.5rem; border-left: 4px solid #2563eb;">
+                <div class="card-v2"
+                    style="border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); background: white;">
+                    <!-- Selection & Application Section -->
+                    <div
+                        style="background: white; padding: 2.5rem; border-radius: 20px; border: 1px solid #e2e8f0; margin-bottom: 2.5rem;">
+                        <h4
+                            style="margin-bottom: 2rem; color: #1e3a8a; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em;">
+                            <i class="fas fa-layer-group"></i> Leave & OD Request
+                        </h4>
+
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1rem;">
+                            <div class="form-group">
+                                <label
+                                    style="display: block; font-weight: 700; font-size: 0.85rem; color: #475569; margin-bottom: 0.5rem;">Department:</label>
+                                <select id="leave-dept" class="form-control"
+                                    style="background: white; padding: 0.75rem; border-radius: 8px; border: 2px solid #e2e8f0; font-size: 0.95rem;"
+                                    onchange="loadStaffByDeptForLeave()">
+                                    <option value="">-- Choose Department --</option>
+                                    <option value="Computer Science">Computer Science</option>
+                                    <option value="Information Technology">Information Technology</option>
+                                    <option value="Electronics & Communication">Electronics & Communication</option>
+                                    <option value="Electrical Engineering">Electrical Engineering</option>
+                                    <option value="Mechanical Engineering">Mechanical Engineering</option>
+                                    <option value="Civil Engineering">Civil Engineering</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label
+                                    style="display: block; font-weight: 700; font-size: 0.85rem; color: #475569; margin-bottom: 0.5rem;">Staff
+                                    (Advisor/HOD):</label>
+                                <select id="leave-staff" class="form-control"
+                                    style="background: white; padding: 0.75rem; border-radius: 8px; border: 2px solid #e2e8f0; font-size: 0.95rem;"
+                                    disabled>
+                                    <option value="">-- Select Staff Member --</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <hr style="border: none; border-top: 2px dashed #cbd5e1; margin: 3rem 0;">
+
+                        <!-- Apply Form (Visible when Staff selected) -->
+                        <div id="leaveFormPanel" style="display: none; animation: fadeIn 0.4s ease-out;">
+                            <h4
+                                style="margin-bottom: 2rem; color: #1e3a8a; font-weight: 800; text-transform: uppercase;">
+                                <i class="fas fa-pencil-alt"></i> Apply for Leave
+                            </h4>
+                            <form id="leaveRequestForm"
+                                style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;">
+                                <div class="form-group">
+                                    <label
+                                        style="display: block; font-weight: 700; font-size: 0.8rem; color: #64748b; margin-bottom: 0.5rem; text-transform: uppercase;">Leave
+                                        Type</label>
+                                    <select id="leave-type" class="form-control" required
+                                        style="border-radius: 10px; border: 2px solid #e2e8f0;">
+                                        <option value="OD">On Duty (OD)</option>
+                                        <option value="ML">Medical Leave (ML)</option>
+                                        <option value="LEAVE">Personal Leave</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label
+                                        style="display: block; font-weight: 700; font-size: 0.8rem; color: #64748b; margin-bottom: 0.5rem; text-transform: uppercase;">From
+                                        Date</label>
+                                    <input type="date" id="leave-from" class="form-control" required
+                                        style="border-radius: 10px; border: 2px solid #e2e8f0;">
+                                </div>
+                                <div class="form-group">
+                                    <label
+                                        style="display: block; font-weight: 700; font-size: 0.8rem; color: #64748b; margin-bottom: 0.5rem; text-transform: uppercase;">To
+                                        Date</label>
+                                    <input type="date" id="leave-to" class="form-control" required
+                                        style="border-radius: 10px; border: 2px solid #e2e8f0;">
+                                </div>
+                                <div class="form-group" style="grid-column: 1 / span 3;">
+                                    <label
+                                        style="display: block; font-weight: 700; font-size: 0.8rem; color: #64748b; margin-bottom: 0.5rem; text-transform: uppercase;">Reason
+                                        / Description</label>
+                                    <textarea id="leave-reason" class="form-control" rows="3"
+                                        placeholder="Explain your reason (e.g., Industrial Visit)..." required
+                                        style="border-radius: 12px; border: 2px solid #e2e8f0; padding: 1rem;"></textarea>
+                                </div>
+                                <div class="form-group"
+                                    style="grid-column: 3; display: flex; justify-content: flex-end;">
+                                    <button type="submit" class="btn btn-primary"
+                                        style="background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%); padding: 1rem 2.5rem; border-radius: 14px; font-weight: 700; box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);">
+                                        [ Submit Request ]
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <hr style="border: none; border-top: 2px dashed #cbd5e1; margin: 3rem 0;">
+
+                    <div style="margin-bottom: 1.5rem;">
+                        <h4
+                            style="color: #475569; font-weight: 800; margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 0.05em;">
+                            Filters:</h4>
+                        <div
+                            style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 1.5rem;">
+                            <div class="form-group">
+                                <label style="font-weight: 600; font-size: 0.85rem; color: #475569;">Leave Type</label>
+                                <select id="filter-leave-type" class="form-control" onchange="filterLeaveRequests()">
+                                    <option value="">All Types</option>
+                                    <option value="OD">On Duty</option>
+                                    <option value="ML">Medical Leave</option>
+                                    <option value="LEAVE">Leave</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label style="font-weight: 600; font-size: 0.85rem; color: #475569;">Status</label>
+                                <select id="filter-status" class="form-control" onchange="filterLeaveRequests()">
+                                    <option value="">All Status</option>
+                                    <option value="PENDING">Pending</option>
+                                    <option value="APPROVED">Approved</option>
+                                    <option value="REJECTED">Rejected</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div style="overflow-x: auto;">
+                            <table style="width: 100%; border-collapse: collapse; text-align: left;">
+                                <thead>
+                                    <tr style="background: white; border-bottom: 2px solid #e2e8f0;">
+                                        <th style="padding: 2rem; font-size: 1.1rem;">#</th>
+                                        <th style="padding: 2rem; font-size: 1.1rem;">Leave Type</th>
+                                        <th style="padding: 2rem; font-size: 1.1rem;">Staff</th>
+                                        <th style="padding: 2rem; font-size: 1.1rem;">From Date</th>
+                                        <th style="padding: 2rem; font-size: 1.1rem;">To Date</th>
+                                        <th style="padding: 2rem; font-size: 1.1rem;">Days</th>
+                                        <th style="padding: 2rem; font-size: 1.1rem;">Applied On</th>
+                                        <th style="padding: 2rem; font-size: 1.1rem;">Reason</th>
+                                        <th style="padding: 2rem; font-size: 1.1rem;">Status</th>
+                                        <th style="padding: 2rem; font-size: 1.1rem;">Remarks</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="leaveRequestsBody">
+                                    <!-- Requests populated via JS -->
+                                    <tr>
+                                        <td colspan="10"
+                                            style="padding: 3rem; text-align: center; color: #94a3b8; font-size: 1.1rem;">
+                                            No leave requests found
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+        </main>
+    </div>
+
+    <script src="js/error-handler.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+
+</html>

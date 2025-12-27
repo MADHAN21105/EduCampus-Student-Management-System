@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎓 EduCampus - Student Management System</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="login-split-container">
+        <!-- Left Side: Illustrations -->
+        <div class="login-left">
+            <img id="login-illustration" src="images/student login.png" alt="Illustration" class="login-illustration"
+                style="width: 85%; max-width: 600px; height: auto;">
+            <div style="text-align: center; margin-top:0rem; z-index: 1;">
+                <h2 style="color: var(--primary); margin-bottom: 1rem;" id="illustration-title">Modern Academic
+                    Management</h2>
+                <p style="color: var(--text-muted); max-width: 400px;">Transforming education through sleek tech and
+                    intuitive insights.</p>
+            </div>
+        </div>
+
+        <!-- Right Side: Form -->
+        <div class="login-right">
+            <div class="login-form-container">
+                <div style="text-align: left; margin-bottom: 2.5rem;">
+                    <div class="logo" style="margin-bottom: 1.5rem;">
+                        <i class="fas fa-graduation-cap"></i>
+                        <span>EduCampus</span>
+                    </div>
+                    <h2 id="form-title">Student Login</h2>
+                    <p style="color: var(--text-muted);">Please enter your credentials to access your portal</p>
+                </div>
+
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label id="username-label" for="username">Roll No</label>
+                        <div class="input-icon-group">
+                            <i class="fas fa-user"></i>
+                            <input type="text" id="username" class="form-control" placeholder="Enter your Roll No"
+                                required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <div class="input-icon-group">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="password" class="form-control" placeholder="••••••••" required>
+                        </div>
+                    </div>
+
+                    <div class="terms-check">
+                        <input type="checkbox" id="terms" required>
+                        <label for="terms">I agree to the <a href="#"
+                                style="color: var(--primary); text-decoration: none;">Terms & Conditions</a></label>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary"
+                        style="width: 100%; padding: 1rem; font-size: 1rem;">Login</button>
+
+                    <div style="text-align: center; margin: 1.5rem 0; color: var(--text-muted); font-size: 0.8rem;">
+                        ---- OR ----
+                    </div>
+
+                    <div class="role-switcher">
+                        <button type="button" class="role-btn active" onclick="switchRole('STUDENT')">Student</button>
+                        <button type="button" class="role-btn" onclick="switchRole('TEACHER')">Staff</button>
+                        <button type="button" class="role-btn" onclick="switchRole('ADMIN')">Admin</button>
+                    </div>
+                </form>
+
+                <p style="text-align: center; margin-top: 2rem; font-size: 0.9rem; color: var(--text-muted);">
+                    New member? <a href="register.html"
+                        style="color: var(--primary); font-weight: 600; text-decoration: none;">Sign up here</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Role Switching Script -->
+    <script>
+        window.currentRole = 'STUDENT';
+        const illustrations = {
+            'STUDENT': 'images/student login.png',
+            'TEACHER': 'images/teacher login.png',
+            'ADMIN': 'images/admin login.png'
+        };
+
+        function switchRole(role) {
+            window.currentRole = role;
+            // Update Buttons
+            document.querySelectorAll('.role-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            // Update Titles & Labels
+            const formTitle = document.getElementById('form-title');
+            const usernameLabel = document.getElementById('username-label');
+            const usernameInput = document.getElementById('username');
+            const illustrationImg = document.getElementById('login-illustration');
+
+            if (role === 'STUDENT') {
+                formTitle.textContent = 'Student Login';
+                usernameLabel.textContent = 'Roll No';
+                usernameInput.placeholder = 'Enter your Roll No';
+            } else if (role === 'TEACHER') {
+                formTitle.textContent = 'Staff Login';
+                usernameLabel.textContent = 'Username';
+                usernameInput.placeholder = 'Enter your Staff ID';
+            } else if (role === 'ADMIN') {
+                formTitle.textContent = 'Admin Login';
+                usernameLabel.textContent = 'Username';
+                usernameInput.placeholder = 'Enter Admin Username';
+            }
+
+            // Update Illustration
+            illustrationImg.style.opacity = 0;
+            setTimeout(() => {
+                illustrationImg.src = illustrations[role];
+                illustrationImg.style.opacity = 1;
+            }, 200);
+        }
+    </script>
+
+    <script src="js/error-handler.js"></script>
+    <script src="js/auth.js"></script>
+</body>
+
+</html>
