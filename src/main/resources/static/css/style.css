@@ -284,11 +284,13 @@ div[style*="overflow-x: auto"] {
 /* Large Tablets and Small Desktops (1024px and below) */
 @media (max-width: 1024px) {
     .dashboard-container {
-        grid-template-columns: 250px 1fr;
+        /* Ensure flex behavior is consistent */
+        flex-direction: row; 
     }
 
     .sidebar {
         width: 250px;
+        flex-shrink: 0;
     }
 
     .grid-2 {
@@ -873,13 +875,30 @@ img {
 }
 
 @media (max-width: 1024px) {
+    .login-split-container {
+        flex-direction: column;
+    }
+
     .login-left {
-        display: none;
+        display: flex; /* Show the illustration */
+        padding: 2rem;
+        flex: 0 0 auto;
+        min-height: 300px;
+    }
+    
+    .login-left::before {
+        width: 400px;
+        height: 400px;
+        top: -100px;
+        left: -100px;
     }
 
     .login-right {
         flex: 1;
         padding: 2rem;
+        width: 100%;
+        max-width: 600px; /* Limit input width when stacked */
+        margin: 0 auto;
     }
 }
 
